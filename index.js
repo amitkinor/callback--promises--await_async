@@ -1,4 +1,8 @@
+/// default behavior - all code executes
 
+/// I have used console log instead of logger for simplicity
+
+/// please comment out each of the 3 parts to check each implementation by itself.
 
 ///////////////////////////////////////////////////////////
 ///                                                     ///
