@@ -37,3 +37,45 @@ function getUser(id,callback){
     }, 2000);
 }
 
+
+//////////////////////////////////////////
+///                                    ///
+///   2.  Promise  implementation      ///
+///                                    ///
+//////////////////////////////////////////
+
+console.log('Before (promise)');
+getUser2(1)
+.then(user => getRepositories2(user.gitHubUsername))
+.then(repos => getCommits2(repos[0]))
+.then(commits => console.log(commits))
+.catch(err => console.log(new Error(err)));
+
+console.log('After (promise)');
+
+function getUser2(id){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('fetching user (promise)');
+            resolve({id:id,  gitHubUsername: 'amitkinor'});
+        }, 2000);
+    })    
+}
+
+function getRepositories2(gitHubUsername){
+    console.log('fetching repos (promise)');
+    return new Promise((resolve, reject) => {
+        setTimeout(()=> {
+            resolve(['repo1', 'repo2', 'repo3']);
+        }, 2000);
+    })       
+}
+
+function getCommits2(repo){
+    console.log('fetching commits (promise)' );
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('here are the commits (promise)');
+        }, 2000);
+    })
+}
