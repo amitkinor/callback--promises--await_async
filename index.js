@@ -79,3 +79,54 @@ function getCommits2(repo){
         }, 2000);
     })
 }
+
+///////////////////////////////////////////
+///                                     ///
+///   3.  Async Await  implementation   ///
+///                                     ///
+///////////////////////////////////////////
+
+console.log('Before (await - async)');
+
+async function displayCommits(){
+    try{
+        const user = await getUser3(1);
+        const repos = await getRepositories3(user.gitHubUsername);
+        const commits = await getCommits3(repos[0]);
+        console.log(commits); 
+    }
+    catch{
+        console.log(new Error('something when wrong (await - async)'));
+    }
+}
+
+displayCommits();
+
+console.log('After (await - async)');
+
+function getUser3(id){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('fetching user (await - async)');
+            resolve({id:id,  gitHubUsername: 'amitkinor'});
+        }, 2000);
+    })    
+}
+
+function getRepositories3(gitHubUsername){
+    console.log('fetching repos (await - async)');
+    return new Promise((resolve, reject) => {
+        setTimeout(()=> {
+            resolve(['repo1', 'repo2', 'repo3']);
+        }, 2000);
+    })       
+}
+
+function getCommits3(repo){
+    console.log('fetching commits (await - async)' );
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('here are the commits (await - async)');
+        }, 2000);
+    })
+}
